@@ -13,7 +13,7 @@ public class Facade {
 	}
 
 	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
-		ControladorPesquisa.alteraPesquisa(codigo, conteudoASerAlterado, novoConteudo);
+		controladorP.alteraPesquisa(codigo, conteudoASerAlterado, novoConteudo);
 	}
 	
 	public void encerraPesquisa(String codigo, String motivo) {
