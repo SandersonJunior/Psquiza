@@ -3,11 +3,16 @@ package controladores;
 import java.util.HashMap;
 
 import sistemaDePesquisas.Pesquisa;
+import validadores.Validador;
 
 public class ControladorPesquisa {
+	private Validador validador = new Validador();
 	private static HashMap<String, Pesquisa> pesquisas = new HashMap<>();
 
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
+		validador.validadorString(descricao,"Descricao nao pode ser nula ou vazia.");
+		validador.validadorTamanhoCampoInteresse(campoDeInteresse, "Formato do campo de interesse invalido.");
+		validador.validadorQuantidadeCampoInteresse(campoDeInteresse, "Formato do campo de interesse invalido.");
 		String codigo = campoDeInteresse.substring(0, 2);
 		codigo = geraCodigo(codigo, 1);
 		Pesquisa p = new Pesquisa(descricao, campoDeInteresse, codigo);

@@ -2,6 +2,8 @@ package facade;
 
 import controladores.ControladorPesquisa;
 
+import easyaccept.EasyAccept;
+
 public class Facade {
 	
 	ControladorPesquisa controladorP = new ControladorPesquisa();
@@ -28,5 +30,15 @@ public class Facade {
 	
 	public boolean pesquisaEhAtiva(String codigo) {
 		return ControladorPesquisa.pesquisaEhAtiva(codigo);
+	}
+	
+	public static void main(String[] args) {
+        args = new String[] {
+                "facade.Facade",
+               "teste_aceitacao/use_case_1.txt"//, "teste_aceitacao/use_case_2.txt",
+//                "teste_aceitacao/use_case_3.txt", "teste_aceitacao/use_case_4.txt"
+                };
+
+        EasyAccept.main(args);
 	}
 }
