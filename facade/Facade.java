@@ -4,7 +4,6 @@ import controladores.ControladorPesquisa;
 
 
 import easyaccept.EasyAccept;
-import sistemaDePesquisas.Atividade;
 import controladores.ControladorAtividade;;
 
 public class Facade {

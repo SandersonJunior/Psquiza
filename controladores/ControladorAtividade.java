@@ -1,7 +1,6 @@
 package controladores;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 import sistemaDePesquisas.Atividade;
 import sistemaDePesquisas.Item;
@@ -11,7 +10,6 @@ public class ControladorAtividade {
 	
 	private static Validador validador = new Validador();
 	private HashMap<String,Atividade> atividadesCriadas = new HashMap<>();
-    private HashMap<String, Item> itensAtividade = new HashMap<>();
 	
 	private int cont = 0;
 	public String cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
