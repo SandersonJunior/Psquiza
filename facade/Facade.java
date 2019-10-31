@@ -1,10 +1,10 @@
 package facade;
 
+import controladores.ControladorAtividade;
 import controladores.ControladorPesquisa;
-
-
+import controladores.ControladorPesquisador;
 import easyaccept.EasyAccept;
-import controladores.ControladorAtividade;;
+
 
 public class Facade {
 	private ControladorAtividade controlerA = new ControladorAtividade();
@@ -51,7 +51,31 @@ public class Facade {
 	public int contaItensRealizados(String codigo) {
 		return controlerA.contaItensRealizados(codigo);
 	}
-	
+	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String foto){
+		ControladorPesquisador.cadastraPesquisador(nome, funcao, biografia, email, foto);
+	}
+
+	public void alteraPesquisador(String email, String atributo, String novoValor){
+		ControladorPesquisador.alteraPesquisador(email, atributo, novoValor);
+	}
+
+	public void desativaPesquisador(String email){
+		ControladorPesquisador.desativaPesquisador(email);
+	}
+
+	public void ativaPesquisador(String email){
+		ControladorPesquisador.ativaPesquisador(email);
+	}
+
+	public String exibePesquisador(String email){
+		ControladorPesquisador.exibePesquisador(email);
+	}
+
+	public boolean pesquisadorEhAtivo(String email){
+		ControladorPesquisador.pesquisadorEhAtivo(email);
+	}
+
+
 	public static void main(String[] args) {
         args = new String[] {
                 "facade.Facade",
