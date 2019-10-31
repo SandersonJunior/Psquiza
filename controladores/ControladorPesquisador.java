@@ -19,7 +19,7 @@ public class ControladorPesquisador {
         Validador.validaFuncao(funcao);
 
         Pesquisador novoPesquisador = new Pesquisador(nome, funcao, biografia, email, foto);
-        this.pesquisadores.put(email, novoPesquisador);
+        pesquisadores.put(email, novoPesquisador);
 
 
     }
@@ -30,7 +30,7 @@ public class ControladorPesquisador {
             throw new IllegalArgumentException("Atributo invalido");
         }
         if (!pesquisadores.containsKey(email)) {
-            throw new IllegalArgumentException("Pesquisador n√£o encontrado");
+            throw new IllegalArgumentException("Pesquisador n„o encontrado");
         }
         if (atributo.equals("NOME")) {
             Validador.validaNome(novoValor);
@@ -39,7 +39,7 @@ public class ControladorPesquisador {
             Validador.validaFuncao(novoValor);
             pesquisadores.get(email).setFuncao(novoValor);
         } else if (atributo.equals("BIOGRAFIA")) {
-            Validador.validaBiografia();
+            Validador.validaBiografia(novoValor);
             pesquisadores.get(email).setBiografia(novoValor);
         } else if (atributo.equals("EMAIL")) {
             Validador.validaEmail(novoValor);
@@ -61,7 +61,7 @@ public class ControladorPesquisador {
         return false;
     }
 
-    public Boolean pesquisadorEhAtivo(String email) {
+    public static Boolean pesquisadorEhAtivo(String email) {
         Validador.validaEmail(email);
         if (pesquisadores.get(email).getStatus().equalsIgnoreCase("ativo")) {
             return true;
@@ -69,27 +69,25 @@ public class ControladorPesquisador {
         return false;
     }
 
-    public String exibePesquisador(String email) {
+    public static String exibePesquisador(String email) {
         Validador.validaEmail(email);
         if (pesquisadores.containsKey(email)) {
-            return this.pesquisadores.get(email).toString();
+            return pesquisadores.get(email).toString();
         }
         throw new IllegalArgumentException("Pesquisador nao encontrado");
 
     }
 
-    public void ativaPesquisador(String email) {
+    public static void ativaPesquisador(String email) {
         Validador.validaEmail(email);
         if (pesquisadores.get(email).getStatus().equalsIgnoreCase("ativo")) {
             throw new IllegalArgumentException("Pesquisador ja ativo");
         }
     }
 
-    public void desativaPesquisador(String email) {
+    public static void desativaPesquisador(String email) {
         if (pesquisadores.get(email).getStatus().equalsIgnoreCase("inativo")) {
             throw new IllegalArgumentException("Pesquisador inativo");
         }
     }
-}
-
 }

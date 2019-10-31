@@ -68,20 +68,20 @@ public class Facade {
 	}
 
 	public String exibePesquisador(String email){
-		ControladorPesquisador.exibePesquisador(email);
+		return ControladorPesquisador.exibePesquisador(email);
 	}
 
 	public boolean pesquisadorEhAtivo(String email){
-		ControladorPesquisador.pesquisadorEhAtivo(email);
+		return ControladorPesquisador.pesquisadorEhAtivo(email);
 	}
 
 
 	public static void main(String[] args) {
         args = new String[] {
                 "facade.Facade",
-               "teste_aceitacao/use_case_1.txt"//, "teste_aceitacao/use_case_2.txt",
+               "teste_aceitacao/use_case_1.txt", "teste_aceitacao/use_case_2.txt",
 //                "teste_aceitacao/use_case_3.txt", 
-                ,"teste_aceitacao/use_case_4.txt"
+                "teste_aceitacao/use_case_4.txt"
                 };
 
         EasyAccept.main(args);
