@@ -17,7 +17,6 @@ public class ControladorPesquisa {
 		String codigo = campoDeInteresse.substring(0, 3);
 		codigo = geraCodigo(codigo, 1);
 		pesquisas.put(codigo, new Pesquisa(descricao, campoDeInteresse, codigo));
-		//System.out.println(pesquisas.toString());
 		return codigo;
 	}
 
@@ -30,7 +29,7 @@ public class ControladorPesquisa {
 		}
 		return cod.toUpperCase();
 	}
-	public static void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
+	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
 		if(!pesquisas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
@@ -51,7 +50,7 @@ public class ControladorPesquisa {
 		}
 	}
 
-	public static void encerraPesquisa(String codigo, String motivo) {
+	public void encerraPesquisa(String codigo, String motivo) {
 		if(!pesquisas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
@@ -62,7 +61,7 @@ public class ControladorPesquisa {
 		pesquisas.get(codigo).setStatus("desativada");
 	}
 
-	public static void ativaPesquisa(String codigo) {
+	public void ativaPesquisa(String codigo) {
 		if(!pesquisas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
