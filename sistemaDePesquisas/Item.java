@@ -10,7 +10,7 @@ public class Item {
 	}
 
 	public String toString() {
-		return " | " + status + " - " + codigoItem + " | ";
+		return " | " + status + " - " + codigoItem;
 	}
 	
 	public String getStatus() {

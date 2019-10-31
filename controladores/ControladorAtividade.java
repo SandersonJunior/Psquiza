@@ -48,13 +48,10 @@ public class ControladorAtividade {
 	
 	public String strListarAtividades(String codigo) { //posicao + "A"
 		String listaItens = "";
-		for (Entry<String, Item> entrada : itensAtividade.entrySet()) {
-			if(entrada.getKey().equals(codigo)) {
-			listaItens += entrada.getValue().toString();
-			System.out.println(itensAtividade.get(codigo));
+		for(int i = 0; i < atividadesCriadas.get(codigo).getItensAtividade().size(); i++) {
+			listaItens += atividadesCriadas.get(codigo).getItensAtividade().get(i).toString();
 			}
-		}
-		return listaItens.substring(0, listaItens.length());
+		return listaItens;
 	}
 	
 	public void cadastraItem(String codigo, String item) {
@@ -63,7 +60,7 @@ public class ControladorAtividade {
 		if(!atividadesCriadas.containsKey(codigo)) {
 			throw new NullPointerException("Atividade nao encontrada");
 		}
-		 itensAtividade.put(codigo, new Item(item, "PEDENTE"));
+		 atividadesCriadas.get(codigo).getItensAtividade().add(new Item(item, "PENDENTE"));
 	}
 	
 	public int contaItensPendentes(String codigo) {
@@ -72,10 +69,9 @@ public class ControladorAtividade {
 			throw new NullPointerException("Atividade nao encontrada");
 		}
 		int cont = 0;
-		for (Entry<String, Item> entrada : itensAtividade.entrySet()) {
-			if(entrada.getKey().equals(codigo)) {
-				if(entrada.getValue().equals("PENDENTE"));
-					cont += 1;
+		for(int i = 0; i < atividadesCriadas.get(codigo).getItensAtividade().size(); i++) {
+			if(atividadesCriadas.get(codigo).getItensAtividade().get(i).getStatus().equals("PENDENTE")){
+				cont += 1;
 			}
 		}
 		return cont;
@@ -85,10 +81,10 @@ public class ControladorAtividade {
 		if(!atividadesCriadas.containsKey(codigo)) {
 			throw new NullPointerException("Atividade nao encontrada");
 		}
-		int cont = 0;
-		for (Entry<String, Item> entrada : itensAtividade.entrySet()) {
-			if(entrada.getKey().equals(codigo)) {
-			cont += 1;
+		cont = 0;
+		for(int i = 0; i < atividadesCriadas.get(codigo).getItensAtividade().size(); i++) {
+			if(atividadesCriadas.get(codigo).getItensAtividade().get(i).getStatus().equals("REALIZADO")){
+				cont += 1;
 			}
 		}
 		return cont;		

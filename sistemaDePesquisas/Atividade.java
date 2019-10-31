@@ -1,5 +1,7 @@
 package sistemaDePesquisas;
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import sistemaDePesquisas.Item;
@@ -9,13 +11,18 @@ public class Atividade {
 	private int duracao;
 	private String descricaoRisco;
 	private String nivelRisco;
-	//private HashMap<String, Item> itensAtividade;
+	private ArrayList<Item> itensAtividade;
 
 	public Atividade(String descricao, String nivelRisco, String descricaoRisco) {
 		this.descricao = descricao;
 		this.descricaoRisco = descricaoRisco;
 		this.nivelRisco = nivelRisco;
-		//this.itensAtividade = new HashMap<>();
+		this.itensAtividade = new ArrayList<Item>();
+	}
+
+
+	public ArrayList<Item> getItensAtividade() {
+		return itensAtividade;
 	}
 
 
