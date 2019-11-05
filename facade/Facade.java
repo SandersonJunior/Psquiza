@@ -3,12 +3,16 @@ package facade;
 import controladores.ControladorAtividade;
 import controladores.ControladorPesquisa;
 import controladores.ControladorPesquisador;
-import easyaccept.EasyAccept;
+import controladores.ControladorProblema;
+import controladores.ControladorObjetivo;
 
+import easyaccept.EasyAccept;
 
 public class Facade {
 	private ControladorAtividade controlerA = new ControladorAtividade();
 	private ControladorPesquisa controladorP = new ControladorPesquisa();
+	private ControladorProblema controladorProblema = new ControladorProblema();
+	private ControladorObjetivo controladorObjetivo = new ControladorObjetivo();
 
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
 		return controladorP.cadastraPesquisa(descricao, campoDeInteresse);
@@ -74,13 +78,36 @@ public class Facade {
 	public boolean pesquisadorEhAtivo(String email){
 		return ControladorPesquisador.pesquisadorEhAtivo(email);
 	}
-
+	
+	public String cadastraProblema(String descricao, int viabilidade) {
+		return controladorProblema.cadastraProblema(descricao, viabilidade);
+	}
+	
+	public String cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
+		return controladorObjetivo.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
+	}
+	
+	public void apagarProblema(String codigo) {
+		controladorProblema.apagarProblema(codigo);
+	}
+	
+	public void apagarObjetivo(String codigo) {
+		controladorObjetivo.apagarObjetivo(codigo);
+	}
+	
+	public String exibeProblema(String codigo) {
+		return controladorProblema.exibeProblema(codigo);
+	}
+	
+	public String exibeObjetivo(String codigo) {
+		return controladorObjetivo.exibeObjetivo(codigo);
+	}
 
 	public static void main(String[] args) {
         args = new String[] {
                 "facade.Facade",
                "teste_aceitacao/use_case_1.txt", "teste_aceitacao/use_case_2.txt",
-//                "teste_aceitacao/use_case_3.txt", 
+                "teste_aceitacao/use_case_3.txt", 
                 "teste_aceitacao/use_case_4.txt"
                 };
 
