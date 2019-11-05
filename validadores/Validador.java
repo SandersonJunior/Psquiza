@@ -114,6 +114,7 @@ public class Validador {
 		else {
 			throw new IllegalArgumentException("Formato de foto invalido.");
 		}
+	}
 
 //		if (foto.length() >= 6) {
 //			boolean fotoValida = false;
@@ -126,6 +127,29 @@ public class Validador {
 //			} else {
 //				throw new IllegalArgumentException("Formato de foto invalido.");
 //			}
+		
+		/*############
+		 * validadores de objetivos e problemas 
+									############
+		*/ 
 //		}
+
+	public static void validaViabilidade(int valor, String mensagem) {
+		if(isNull(valor) || isEmpty(Integer.toString(valor))) {
+			throw new IllegalArgumentException("Campo viabilidade nao pode ser nulo ou vazio.");
+		}
+		else if(valor > 5 || valor < 1) {
+			throw new IllegalArgumentException(mensagem);			
+		}
 	}
+
+	public static void validaAderencia(int valor, String mensagem) {
+		if(isNull(valor) || isEmpty(Integer.toString(valor))) {
+			throw new IllegalArgumentException("Campo aderencia nao pode ser nulo ou vazio.");
+		}
+		else if(valor > 5 || valor < 1) {
+			throw new IllegalArgumentException(mensagem);			
+		}
+	}
+		
 }
