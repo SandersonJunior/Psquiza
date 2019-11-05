@@ -66,6 +66,6 @@ public class Pesquisador {
 
 	@Override
 	public String toString() {
-		return nome + "(" + funcao + ") " + biografia + " - " + email + " - " + foto;
+		return nome + "(" + funcao + ") - "  + biografia + " - " + email + " - " + foto;
 	}
 }
