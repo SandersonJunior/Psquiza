@@ -6,12 +6,13 @@ import sistemaDePesquisas.Objetivo;
 import validadores.Validador;
 
 public class ControladorObjetivo {
-	private static Validador validador = new Validador();	
+	private Validador validador = new Validador();	
 	private HashMap<String, Objetivo> objetivosCadastrados = new HashMap<>();
 	
 	int cont = 0;
 	public String cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
 		validador.validadorString(tipo, "Campo tipo nao pode ser nulo ou vazio.");
+		validador.validadorTipo(tipo, "Valor invalido de tipo.");
 		validador.validadorString(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		validador.validaViabilidade(viabilidade, "Valor invalido de viabilidade.");
 		validador.validaAderencia(aderencia, "Valor invalido de aderencia");

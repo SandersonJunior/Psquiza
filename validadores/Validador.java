@@ -1,8 +1,5 @@
 package validadores;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Validador {
 
 	public void validadorString(String palavra, String mensagem) {
@@ -10,6 +7,18 @@ public class Validador {
 			throw new IllegalArgumentException(mensagem);
 		}
 
+	}
+	
+	public void validadorTipo(String palavra, String mensagem) {
+		if(!palavra.equals("GERAL") && !palavra.equals("ESPECIFICO")) {
+			throw new IllegalArgumentException(mensagem);
+		}
+	}
+	
+	public void validadorTipo2(String palavra, String mensagem) {
+		if(!palavra.equals("PROBLEMA") && !palavra.equals("OBJETIVOS") && !palavra.equals("PESQUISA")) {
+			throw new IllegalArgumentException(mensagem);
+		}
 	}
 
 	public void validadorTamanhoCampoInteresse(String campoInteresse, String mensagem) {
@@ -41,10 +50,6 @@ public class Validador {
 
 	private static boolean isEmpty(String valor) {
 		return valor.trim().equals("");
-	}
-
-	private boolean isEmpty(Integer valor) {
-		return Integer.toString(valor).trim().equals("");
 	}
 
 	public static void validaNome(String nome) {
@@ -134,7 +139,7 @@ public class Validador {
 		*/ 
 //		}
 
-	public static void validaViabilidade(int valor, String mensagem) {
+	public void validaViabilidade(int valor, String mensagem) {
 		if(isNull(valor) || isEmpty(Integer.toString(valor))) {
 			throw new IllegalArgumentException("Campo viabilidade nao pode ser nulo ou vazio.");
 		}
@@ -143,7 +148,7 @@ public class Validador {
 		}
 	}
 
-	public static void validaAderencia(int valor, String mensagem) {
+	public void validaAderencia(int valor, String mensagem) {
 		if(isNull(valor) || isEmpty(Integer.toString(valor))) {
 			throw new IllegalArgumentException("Campo aderencia nao pode ser nulo ou vazio.");
 		}

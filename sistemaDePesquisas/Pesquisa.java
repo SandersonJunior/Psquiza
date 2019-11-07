@@ -1,21 +1,24 @@
 package sistemaDePesquisas;
 
-import java.util.HashMap;
-
-import javax.swing.table.TableStringConverter;
+import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class Pesquisa {
 	private String descricao;
 	private String campoDeInteresse;
 	private String status;
 	private String codigo;
+	private String problema;
+	private ArrayList<String> objetivos;
 
 	public Pesquisa(String descricao, String campoDeInteresse,String codigo) {
 		this.descricao = descricao;
 		this.campoDeInteresse = campoDeInteresse;
 		this.status = "ativa";
 		this.codigo = codigo;
-	}
+		this.problema = "";
+		this.objetivos = new ArrayList<String>();
+		}
 
 	public String getCodigo() {
 		return codigo;
@@ -44,11 +47,25 @@ public class Pesquisa {
 	public String getCampoDeInteresse() {
 		return campoDeInteresse;
 	}
+	
+	public void setProblema(String idProblema) {
+		this.problema = idProblema;
+	}
+	
+	public String getProblema() {
+		return problema;
+	}
+	
+	public ArrayList<String> getObjetivos() {
+		return objetivos;
+	}
 
 	@Override
 	public String toString() {
 		return getCodigo() + " - " + getDescricao() + " - " + getCampoDeInteresse();
 	}
+
+	
 
 	
 }
