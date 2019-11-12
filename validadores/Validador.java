@@ -40,25 +40,25 @@ public class Validador {
 		}
 	}
 
-	private static boolean isNull(String valor) {
+	private  boolean isNull(String valor) {
 		return valor == null;
 	}
 
-	private static boolean isNull(Integer valor) {
+	private  boolean isNull(Integer valor) {
 		return valor == null;
 	}
 
-	private static boolean isEmpty(String valor) {
+	private  boolean isEmpty(String valor) {
 		return valor.trim().equals("");
 	}
 
-	public static void validaNome(String nome) {
+	public  void validaNome(String nome) {
 		if (isNull(nome) || isEmpty(nome)) {
 			throw new IllegalArgumentException("Campo nome nao pode ser nulo ou vazio.");
 		}
 	}
 
-	private static boolean possuiDigitoOuLetra(String nome) {
+	private  boolean possuiDigitoOuLetra(String nome) {
 		for (char letra : nome.toCharArray()) {
 			if (Character.isAlphabetic(letra) || Character.isDigit(letra))
 				return true;
@@ -66,7 +66,7 @@ public class Validador {
 		return false;
 	}
 
-	public static void validaEmail(String email) {
+	public void validaEmail(String email) {
 		if (isNull(email) || isEmpty(email)) {
 			throw new IllegalArgumentException("Campo email nao pode ser nulo ou vazio.");
 		}
@@ -87,20 +87,20 @@ public class Validador {
 
 	}
 
-	public static void validaFuncao(String funcao) {
+	public void validaFuncao(String funcao) {
 		if (isNull(funcao) || isEmpty(funcao)) {
 			throw new IllegalArgumentException("Campo funcao nao pode ser nulo ou vazio.");
 		}
 	}
 
-	public static void validaBiografia(String biografia) {
+	public  void validaBiografia(String biografia) {
 		if (isNull(biografia) || isEmpty(biografia)) {
 			throw new IllegalArgumentException("Campo biografia nao pode ser nulo ou vazio.");
 		}
 
 	}
 
-	public static void validaFoto(String foto) {
+	public void validaFoto(String foto) {
 		if (isNull(foto) || isEmpty(foto)) {
 			throw new IllegalArgumentException("Campo fotoURL nao pode ser nulo ou vazio.");
 		}

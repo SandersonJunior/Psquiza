@@ -13,6 +13,7 @@ public class Facade {
 	private ControladorPesquisa controladorP = new ControladorPesquisa();
 	private ControladorProblema controladorProblema = new ControladorProblema();
 	private ControladorObjetivo controladorObjetivo = new ControladorObjetivo();
+	private ControladorPesquisador controladorPesquisador = new ControladorPesquisador();
 
 // US1
 
@@ -43,27 +44,27 @@ public class Facade {
 // US 2
 
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String foto) {
-		ControladorPesquisador.cadastraPesquisador(nome, funcao, biografia, email, foto);
+		controladorPesquisador.cadastraPesquisador(nome, funcao, biografia, email, foto);
 	}
 
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
-		ControladorPesquisador.alteraPesquisador(email, atributo, novoValor);
+		controladorPesquisador.alteraPesquisador(email, atributo, novoValor);
 	}
 
 	public void desativaPesquisador(String email) {
-		ControladorPesquisador.desativaPesquisador(email);
+		controladorPesquisador.desativaPesquisador(email);
 	}
 
 	public void ativaPesquisador(String email) {
-		ControladorPesquisador.ativaPesquisador(email);
+		controladorPesquisador.ativaPesquisador(email);
 	}
 
 	public String exibePesquisador(String email) {
-		return ControladorPesquisador.exibePesquisador(email);
+		return controladorPesquisador.exibePesquisador(email);
 	}
 
 	public boolean pesquisadorEhAtivo(String email) {
-		return ControladorPesquisador.pesquisadorEhAtivo(email);
+		return controladorPesquisador.pesquisadorEhAtivo(email);
 	}
 
 // US 3

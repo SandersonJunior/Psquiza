@@ -7,22 +7,23 @@ import java.util.HashMap;
 
 public class ControladorPesquisador {
 
-	private static HashMap<String, Pesquisador> pesquisadores = new HashMap<>();
+	private HashMap<String, Pesquisador> pesquisadores = new HashMap<>();
+	private Validador validador = new Validador();
 
-	public static void cadastraPesquisador(String nome, String funcao, String biografia, String email, String foto) {
-		Validador.validaNome(nome);
-		Validador.validaEmail(email);
-		Validador.validaBiografia(biografia);
-		Validador.validaFoto(foto);
-		Validador.validaFuncao(funcao);
+	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String foto) {
+		validador.validaNome(nome);
+		validador.validaEmail(email);
+		validador.validaBiografia(biografia);
+		validador.validaFoto(foto);
+		validador.validaFuncao(funcao);
 
 		Pesquisador novoPesquisador = new Pesquisador(nome, funcao, biografia, email, foto);
 		pesquisadores.put(email, novoPesquisador);
 
 	}
 
-	public static void alteraPesquisador(String email, String atributo, String novoValor) {
-		Validador.validaEmail(email);
+	public void alteraPesquisador(String email, String atributo, String novoValor) {
+		validador.validaEmail(email);
 		if (!existeAtributo(atributo)) {
 			throw new IllegalArgumentException("Atributo invalido");
 		}
@@ -30,33 +31,33 @@ public class ControladorPesquisador {
 			throw new IllegalArgumentException("Pesquisador não encontrado");
 		}
 		if (atributo.equals("NOME")) {
-			Validador.validaNome(novoValor);
+			validador.validaNome(novoValor);
 			pesquisadores.get(email).setNome(novoValor);
 		} else if (atributo.equals("FUNCAO")) {
-			Validador.validaFuncao(novoValor);
+			validador.validaFuncao(novoValor);
 			pesquisadores.get(email).setFuncao(novoValor);
 		} else if (atributo.equals("BIOGRAFIA")) {
-			Validador.validaBiografia(novoValor);
+			validador.validaBiografia(novoValor);
 			pesquisadores.get(email).setBiografia(novoValor);
 		} else if (atributo.equals("EMAIL")) {
-			Validador.validaEmail(novoValor);
+			validador.validaEmail(novoValor);
 			pesquisadores.get(email).setEmail(novoValor);
 		} else if (atributo.equals("FOTO")) {
-			Validador.validaFoto(novoValor);
+			validador.validaFoto(novoValor);
 			pesquisadores.get(email).setFoto(novoValor);
 		}
 	}
 
-	public static Boolean pesquisadorEhAtivo(String email) {
-		Validador.validaEmail(email);
+	public Boolean pesquisadorEhAtivo(String email) {
+		validador.validaEmail(email);
 		if (pesquisadores.get(email).getStatus().equalsIgnoreCase("ativo")) {
 			return true;
 		}
 		return false;
 	}
 
-	public static String exibePesquisador(String email) {
-		Validador.validaEmail(email);
+	public String exibePesquisador(String email) {
+		validador.validaEmail(email);
 		if (pesquisadores.containsKey(email)) {
 			return pesquisadores.get(email).toString();
 		}
@@ -64,21 +65,21 @@ public class ControladorPesquisador {
 
 	}
 
-	public static void ativaPesquisador(String email) {
-		Validador.validaEmail(email);
+	public void ativaPesquisador(String email) {
+		validador.validaEmail(email);
 		if (pesquisadores.get(email).getStatus().equalsIgnoreCase("ativo")) {
 			throw new IllegalArgumentException("Pesquisador ja ativo");
 		}
 	}
 
-	public static void desativaPesquisador(String email) {
+	public void desativaPesquisador(String email) {
 		if (pesquisadores.get(email).getStatus().equalsIgnoreCase("inativo")) {
 			throw new IllegalArgumentException("Pesquisador inativo");
 		}
 	}
 
 	
-	private static boolean existeAtributo(String atributo) {
+	private boolean existeAtributo(String atributo) {
 		if (atributo.trim().equalsIgnoreCase("NOME") || atributo.trim().equalsIgnoreCase("BIOGRAFIA")
 				|| atributo.trim().equalsIgnoreCase("FOTO") || atributo.trim().equalsIgnoreCase("EMAIL")
 				|| atributo.trim().equalsIgnoreCase("FUNCAO")) {
@@ -86,7 +87,7 @@ public class ControladorPesquisador {
 		}
 		return false;
 	}
-	public static boolean existePesquisador(String email) {
+	public boolean existePesquisador(String email) {
 		boolean existe = false;
 		if (pesquisadores.containsKey(email)) {
 			existe = true;

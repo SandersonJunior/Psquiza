@@ -4,9 +4,9 @@ import controladores.ControladorPesquisador;
 
 public class AE_Pesquisador {
 
-	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
-		if (ControladorPesquisador.existePesquisador(email)) {
-			
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data, ControladorPesquisador controller) {
+		if (controller.existePesquisador(email)) {
+
 		}
 	}
 
