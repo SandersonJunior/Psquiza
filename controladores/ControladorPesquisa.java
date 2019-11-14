@@ -198,20 +198,37 @@ public class ControladorPesquisa {
 	}
 		else if(ordem.equals("OBJETIVOS")) {
 			String aux = "";
-			for (int i = 0; i > (maiorValor.size()-1); i++) {
-				for (int j = 0; j > (maiorValor.size()-1); j++) {
+			for (int i = 0; i < (maiorValor.size()); i++) {
+				for (int j = 0; j < (maiorValor.size()); j++) {
 				if(pesquisas.get(maiorValor.get(i)).getObjetivos().size() < pesquisas.get(maiorValor.get(j)).getObjetivos().size()) {
 					aux = maiorValor.get(i);
 					maiorValor.set(i, maiorValor.get(j));
-					maiorValor.set((j), aux);
+					maiorValor.set(j, aux);
 				}
 			}
+				
 			}
-			for(int i = 0; i > (maiorValor.size()-1); i++) {
+			for(int i = (maiorValor.size())-1; i > -1; i--) {
 				lista += pesquisas.get(maiorValor.get(i)).toString() + " | ";
 			}
 		}
-		System.out.println(lista);
+		else if(ordem.equals("PESQUISA")) {
+			String aux = "";
+			for (int i = 0; i < (maiorValor.size()); i++) {
+				for (int j = 0; j < (maiorValor.size()); j++) {
+				if(pesquisas.get(maiorValor.get(i)).getObjetivos().size() > pesquisas.get(maiorValor.get(j)).getObjetivos().size()) {
+					aux = maiorValor.get(i);
+					maiorValor.set(i, maiorValor.get(j));
+					maiorValor.set(j, aux);
+				}
+			}
+				
+			}
+			for(int i = (maiorValor.size())-1; i > -1; i--) {
+				lista += pesquisas.get(maiorValor.get(i)).toString() + " | ";
+			}
+		}
+		
 		return lista.substring(0,lista.length()-3);
 
 }
