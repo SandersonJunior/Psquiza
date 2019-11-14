@@ -1,13 +1,15 @@
 package sistemaDePesquisas;
 
-public class Professor extends Pesquisador {
+public class Professor {
 	private String formacao;
 	private String unidade;
 	private String data;
 
 	public Professor(String nome, String biografia, String email, String foto, String funcao, String formacao,
 			String unidade, String data) {
-		super(nome, biografia, email, foto, funcao);
+		this.formacao = formacao;
+		this.unidade = unidade;
+		this.data = data;
 
 	}
 

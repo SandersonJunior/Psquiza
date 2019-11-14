@@ -5,8 +5,8 @@ import validadores.Validador;
 
 import java.util.HashMap;
 
-import org.hamcrest.core.Is;
-import org.hamcrest.core.IsNull;
+//import org.hamcrest.core.Is;
+//import org.hamcrest.core.IsNull;
 
 public class ControladorPesquisador {
 
@@ -26,7 +26,7 @@ public class ControladorPesquisador {
 
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
 		validador.validadorStringNula(atributo, "Atributo nao pode ser vazio ou nulo.");
-		validador.validadorString(atributo,"Atributo nao pode ser vazio ou nulo.");
+		validador.validadorString(atributo, "Atributo nao pode ser vazio ou nulo.");
 		validador.validaEmail(email);
 		if (!pesquisadores.containsKey(email)) {
 			throw new IllegalArgumentException("Pesquisador nao encontrado");
@@ -34,7 +34,7 @@ public class ControladorPesquisador {
 		if (!existeAtributo(atributo)) {
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
-		
+
 		if (atributo.equals("NOME")) {
 			validador.validaNome(novoValor);
 			pesquisadores.get(email).setNome(novoValor);
@@ -46,7 +46,7 @@ public class ControladorPesquisador {
 			pesquisadores.get(email).setBiografia(novoValor);
 		} else if (atributo.equals("EMAIL")) {
 			validador.validaEmail(novoValor);
-			pesquisadores.put(novoValor,pesquisadores.get(email));
+			pesquisadores.put(novoValor, pesquisadores.get(email));
 			pesquisadores.get(email).setEmail(novoValor);
 			pesquisadores.remove(email);
 		} else if (atributo.equals("FOTO")) {
@@ -56,9 +56,9 @@ public class ControladorPesquisador {
 	}
 
 	public Boolean pesquisadorEhAtivo(String email) {
-		validador.validadorString(email,"Email nao pode ser vazio ou nulo.");
+		validador.validadorString(email, "Email nao pode ser vazio ou nulo.");
 		validador.validaEmail(email);
-		if(!pesquisadores.containsKey(email)) {
+		if (!pesquisadores.containsKey(email)) {
 			throw new NullPointerException("Pesquisador nao encontrado");
 		}
 		if (pesquisadores.get(email).getStatus().equalsIgnoreCase("ativo")) {
@@ -78,7 +78,7 @@ public class ControladorPesquisador {
 
 	public void ativaPesquisador(String email) {
 		validador.validaEmail(email);
-		if(!pesquisadores.containsKey(email)) {
+		if (!pesquisadores.containsKey(email)) {
 			throw new NullPointerException("Pesquisador nao encontrado");
 		}
 		if (pesquisadores.get(email).getStatus().equals("ativo")) {
@@ -89,7 +89,7 @@ public class ControladorPesquisador {
 
 	public void desativaPesquisador(String email) {
 		validador.validaEmail(email);
-		if(!pesquisadores.containsKey(email)) {
+		if (!pesquisadores.containsKey(email)) {
 			throw new NullPointerException("Pesquisador nao encontrado");
 		}
 		if (pesquisadores.get(email).getStatus().equalsIgnoreCase("inativo")) {
@@ -98,20 +98,27 @@ public class ControladorPesquisador {
 		pesquisadores.get(email).setStatus("inativo");
 	}
 
-	
 	private boolean existeAtributo(String atributo) {
-		if (atributo.equals("NOME") || atributo.equals("BIOGRAFIA")
-				|| atributo.equals("FOTO") || atributo.equals("EMAIL")
-				|| atributo.equals("FUNCAO")) {
+		if (atributo.equals("NOME") || atributo.equals("BIOGRAFIA") || atributo.equals("FOTO")
+				|| atributo.equals("EMAIL") || atributo.equals("FUNCAO")) {
 			return true;
 		}
 		return false;
 	}
+
 	public boolean existePesquisador(String email) {
 		boolean existe = false;
 		if (pesquisadores.containsKey(email)) {
 			existe = true;
 		}
 		return existe;
+	}
+
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+
+	}
+
+	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
+
 	}
 }

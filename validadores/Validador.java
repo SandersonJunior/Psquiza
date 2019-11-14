@@ -6,24 +6,23 @@ public class Validador {
 		if ("".equals(palavra.trim())) {
 			throw new NullPointerException(mensagem);
 		}
-		
+
 	}
-	
+
 	public void validadorStringNula(String palavra, String mensagem) {
-		if(palavra == null) {
+		if (palavra == null) {
 			throw new NullPointerException(mensagem);
 		}
 	}
-	
-	
+
 	public void validadorTipo(String palavra, String mensagem) {
-		if(!palavra.equals("GERAL") && !palavra.equals("ESPECIFICO")) {
+		if (!palavra.equals("GERAL") && !palavra.equals("ESPECIFICO")) {
 			throw new IllegalArgumentException(mensagem);
 		}
 	}
-	
+
 	public void validadorTipo2(String palavra, String mensagem) {
-		if(!palavra.equals("PROBLEMA") && !palavra.equals("OBJETIVOS") && !palavra.equals("PESQUISA")) {
+		if (!palavra.equals("PROBLEMA") && !palavra.equals("OBJETIVOS") && !palavra.equals("PESQUISA")) {
 			throw new IllegalArgumentException(mensagem);
 		}
 	}
@@ -47,25 +46,25 @@ public class Validador {
 		}
 	}
 
-	private  boolean isNull(String valor) {
+	private boolean isNull(String valor) {
 		return valor == null;
 	}
 
-	private  boolean isNull(Integer valor) {
+	private boolean isNull(Integer valor) {
 		return valor == null;
 	}
 
-	private  boolean isEmpty(String valor) {
+	private boolean isEmpty(String valor) {
 		return valor.trim().equals("");
 	}
 
-	public  void validaNome(String nome) {
+	public void validaNome(String nome) {
 		if (isNull(nome) || isEmpty(nome)) {
 			throw new IllegalArgumentException("Campo nome nao pode ser nulo ou vazio.");
 		}
 	}
 
-	private  boolean possuiDigitoOuLetra(String nome) {
+	private boolean possuiDigitoOuLetra(String nome) {
 		for (char letra : nome.toCharArray()) {
 			if (Character.isAlphabetic(letra) || Character.isDigit(letra))
 				return true;
@@ -100,7 +99,7 @@ public class Validador {
 		}
 	}
 
-	public  void validaBiografia(String biografia) {
+	public void validaBiografia(String biografia) {
 		if (isNull(biografia) || isEmpty(biografia)) {
 			throw new IllegalArgumentException("Campo biografia nao pode ser nulo ou vazio.");
 		}
@@ -119,49 +118,28 @@ public class Validador {
 			int index = foto.substring(0, 7).equals("http://") ? 7 : 8;
 			if (!possuiDigitoOuLetra(foto.substring(index, foto.length()))) {
 				throw new IllegalArgumentException("Formato de foto invalido.");
-				}
 			}
+		}
 
-		
 		else {
 			throw new IllegalArgumentException("Formato de foto invalido.");
 		}
 	}
 
-//		if (foto.length() >= 6) {
-//			boolean fotoValida = false;
-//			String expressao = "^((((https?|http?)://)|(mailto:|news:))"
-//					+ "(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)";
-//			Pattern pattern = Pattern.compile(expressao, Pattern.CASE_INSENSITIVE);
-//			Matcher matcher = pattern.matcher(foto);
-//			if (matcher.matches()) {
-//				fotoValida = true;
-//			} else {
-//				throw new IllegalArgumentException("Formato de foto invalido.");
-//			}
-		
-		/*############
-		 * validadores de objetivos e problemas 
-									############
-		*/ 
-//		}
-
 	public void validaViabilidade(int valor, String mensagem) {
-		if(isNull(valor) || isEmpty(Integer.toString(valor))) {
+		if (isNull(valor) || isEmpty(Integer.toString(valor))) {
 			throw new IllegalArgumentException("Campo viabilidade nao pode ser nulo ou vazio.");
-		}
-		else if(valor > 5 || valor < 1) {
-			throw new IllegalArgumentException(mensagem);			
+		} else if (valor > 5 || valor < 1) {
+			throw new IllegalArgumentException(mensagem);
 		}
 	}
 
 	public void validaAderencia(int valor, String mensagem) {
-		if(isNull(valor) || isEmpty(Integer.toString(valor))) {
+		if (isNull(valor) || isEmpty(Integer.toString(valor))) {
 			throw new IllegalArgumentException("Campo aderencia nao pode ser nulo ou vazio.");
-		}
-		else if(valor > 5 || valor < 1) {
-			throw new IllegalArgumentException(mensagem);			
+		} else if (valor > 5 || valor < 1) {
+			throw new IllegalArgumentException(mensagem);
 		}
 	}
-		
+
 }
