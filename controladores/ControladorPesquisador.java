@@ -5,6 +5,9 @@ import validadores.Validador;
 
 import java.util.HashMap;
 
+import org.hamcrest.core.Is;
+import org.hamcrest.core.IsNull;
+
 public class ControladorPesquisador {
 
 	private HashMap<String, Pesquisador> pesquisadores = new HashMap<>();
@@ -17,19 +20,21 @@ public class ControladorPesquisador {
 		validador.validaFoto(foto);
 		validador.validaFuncao(funcao);
 
-		Pesquisador novoPesquisador = new Pesquisador(nome, funcao, biografia, email, foto);
-		pesquisadores.put(email, novoPesquisador);
+		pesquisadores.put(email, new Pesquisador(nome, funcao, biografia, email, foto));
 
 	}
 
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
+		validador.validadorStringNula(atributo, "Atributo nao pode ser vazio ou nulo.");
+		validador.validadorString(atributo,"Atributo nao pode ser vazio ou nulo.");
 		validador.validaEmail(email);
-		if (!existeAtributo(atributo)) {
-			throw new IllegalArgumentException("Atributo invalido");
-		}
 		if (!pesquisadores.containsKey(email)) {
-			throw new IllegalArgumentException("Pesquisador não encontrado");
+			throw new IllegalArgumentException("Pesquisador nao encontrado");
 		}
+		if (!existeAtributo(atributo)) {
+			throw new IllegalArgumentException("Atributo invalido.");
+		}
+		
 		if (atributo.equals("NOME")) {
 			validador.validaNome(novoValor);
 			pesquisadores.get(email).setNome(novoValor);
@@ -41,7 +46,9 @@ public class ControladorPesquisador {
 			pesquisadores.get(email).setBiografia(novoValor);
 		} else if (atributo.equals("EMAIL")) {
 			validador.validaEmail(novoValor);
+			pesquisadores.put(novoValor,pesquisadores.get(email));
 			pesquisadores.get(email).setEmail(novoValor);
+			pesquisadores.remove(email);
 		} else if (atributo.equals("FOTO")) {
 			validador.validaFoto(novoValor);
 			pesquisadores.get(email).setFoto(novoValor);
@@ -49,7 +56,11 @@ public class ControladorPesquisador {
 	}
 
 	public Boolean pesquisadorEhAtivo(String email) {
+		validador.validadorString(email,"Email nao pode ser vazio ou nulo.");
 		validador.validaEmail(email);
+		if(!pesquisadores.containsKey(email)) {
+			throw new NullPointerException("Pesquisador nao encontrado");
+		}
 		if (pesquisadores.get(email).getStatus().equalsIgnoreCase("ativo")) {
 			return true;
 		}
@@ -67,22 +78,31 @@ public class ControladorPesquisador {
 
 	public void ativaPesquisador(String email) {
 		validador.validaEmail(email);
-		if (pesquisadores.get(email).getStatus().equalsIgnoreCase("ativo")) {
-			throw new IllegalArgumentException("Pesquisador ja ativo");
+		if(!pesquisadores.containsKey(email)) {
+			throw new NullPointerException("Pesquisador nao encontrado");
 		}
+		if (pesquisadores.get(email).getStatus().equals("ativo")) {
+			throw new IllegalArgumentException("Pesquisador ja ativado.");
+		}
+		pesquisadores.get(email).setStatus("ativo");
 	}
 
 	public void desativaPesquisador(String email) {
-		if (pesquisadores.get(email).getStatus().equalsIgnoreCase("inativo")) {
-			throw new IllegalArgumentException("Pesquisador inativo");
+		validador.validaEmail(email);
+		if(!pesquisadores.containsKey(email)) {
+			throw new NullPointerException("Pesquisador nao encontrado");
 		}
+		if (pesquisadores.get(email).getStatus().equalsIgnoreCase("inativo")) {
+			throw new IllegalArgumentException("Pesquisador inativo.");
+		}
+		pesquisadores.get(email).setStatus("inativo");
 	}
 
 	
 	private boolean existeAtributo(String atributo) {
-		if (atributo.trim().equalsIgnoreCase("NOME") || atributo.trim().equalsIgnoreCase("BIOGRAFIA")
-				|| atributo.trim().equalsIgnoreCase("FOTO") || atributo.trim().equalsIgnoreCase("EMAIL")
-				|| atributo.trim().equalsIgnoreCase("FUNCAO")) {
+		if (atributo.equals("NOME") || atributo.equals("BIOGRAFIA")
+				|| atributo.equals("FOTO") || atributo.equals("EMAIL")
+				|| atributo.equals("FUNCAO")) {
 			return true;
 		}
 		return false;

@@ -8,7 +8,7 @@ public class Pesquisador {
 	private String funcao;
 	private String status;
 
-	public Pesquisador(String nome, String biografia, String email, String foto, String funcao) {
+	public Pesquisador(String nome, String funcao, String biografia, String email, String foto) {
 
 		this.nome = nome;
 		this.biografia = biografia;
@@ -21,8 +21,10 @@ public class Pesquisador {
 	public String getStatus() {
 		return status;
 	}
-	// public String setStatus(){
-	// this.status = status;
+	
+	public void setStatus(String status){
+	 this.status = status;
+	}
 
 	public String getNome() {
 		return nome;
@@ -66,6 +68,6 @@ public class Pesquisador {
 
 	@Override
 	public String toString() {
-		return nome + "(" + funcao + ") - "  + biografia + " - " + email + " - " + foto;
+		return nome + " (" + funcao + ") - "  + biografia + " - " + email + " - " + foto;
 	}
 }

@@ -3,11 +3,18 @@ package validadores;
 public class Validador {
 
 	public void validadorString(String palavra, String mensagem) {
-		if ("".equals(palavra.trim()) || palavra == null) {
-			throw new IllegalArgumentException(mensagem);
+		if ("".equals(palavra.trim())) {
+			throw new NullPointerException(mensagem);
 		}
-
+		
 	}
+	
+	public void validadorStringNula(String palavra, String mensagem) {
+		if(palavra == null) {
+			throw new NullPointerException(mensagem);
+		}
+	}
+	
 	
 	public void validadorTipo(String palavra, String mensagem) {
 		if(!palavra.equals("GERAL") && !palavra.equals("ESPECIFICO")) {
