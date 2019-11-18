@@ -1,12 +1,15 @@
 package sistemaDePesquisas;
 
-public class Professor {
+import interfaces.Especialidade;
+
+public class Professor extends Pesquisador implements Especialidade {
 	private String formacao;
 	private String unidade;
 	private String data;
 
-	public Professor(String nome, String biografia, String email, String foto, String funcao, String formacao,
+	public Professor(String nome, String funcao, String biografia, String email, String foto, String formacao,
 			String unidade, String data) {
+		super(nome, funcao, biografia, email, foto);
 		this.formacao = formacao;
 		this.unidade = unidade;
 		this.data = data;

@@ -176,7 +176,7 @@ public class ControladorPesquisa {
 	}
 
 	public String listaPesquisas(String ordem) {
-		validador.validadorTipo2(ordem, "Valor invalido da ordem");
+		validador.validadorTipoPesquisa(ordem, "Valor invalido da ordem");
 		ArrayList<String> maiorValor = new ArrayList<>();
 		for (String key : pesquisas.keySet()) {
 			maiorValor.add(key);

@@ -140,10 +140,20 @@ public class Facade {
 	public String listaPesquisas(String ordem) {
 		return controladorP.listaPesquisas(ordem);
 	}
+	
+// US 6
+	
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		controladorPesquisador.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
+	}
+	
+	public void cadastraEspecialidadeAluno(String email, int semestre, double iea) {
+		controladorPesquisador.cadastraEspecialidadeAluno(email, semestre, iea);
+	}
 
 	public static void main(String[] args) {
 		args = new String[] { "facade.Facade", "teste_aceitacao/use_case_1.txt", "teste_aceitacao/use_case_2.txt",
-				"teste_aceitacao/use_case_3.txt", "teste_aceitacao/use_case_4.txt", "teste_aceitacao/use_case_5.txt" };
+				"teste_aceitacao/use_case_3.txt", "teste_aceitacao/use_case_4.txt", "teste_aceitacao/use_case_5.txt", "teste_aceitacao/use_case_6.txt" };
 
 		EasyAccept.main(args);
 	}

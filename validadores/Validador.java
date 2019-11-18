@@ -3,25 +3,34 @@ package validadores;
 public class Validador {
 
 	public void validadorString(String palavra, String mensagem) {
-		if ("".equals(palavra.trim())) {
-			throw new NullPointerException(mensagem);
-		}
-
-	}
-
-	public void validadorStringNula(String palavra, String mensagem) {
 		if (palavra == null) {
 			throw new NullPointerException(mensagem);
 		}
+
+		if ("".equals(palavra)) {
+			throw new IllegalArgumentException(mensagem);
+		}
+
 	}
 
-	public void validadorTipo(String palavra, String mensagem) {
+	public void validadorInt(Integer numero, String mensagem) {
+		if (numero == null) {
+			throw new NullPointerException(mensagem);
+		}
+
+		if ("".equals(numero.toString())) {
+			throw new IllegalArgumentException(mensagem);
+
+		}
+	}
+
+	public void validadorTipoObjetivo(String palavra, String mensagem) {
 		if (!palavra.equals("GERAL") && !palavra.equals("ESPECIFICO")) {
 			throw new IllegalArgumentException(mensagem);
 		}
 	}
 
-	public void validadorTipo2(String palavra, String mensagem) {
+	public void validadorTipoPesquisa(String palavra, String mensagem) {
 		if (!palavra.equals("PROBLEMA") && !palavra.equals("OBJETIVOS") && !palavra.equals("PESQUISA")) {
 			throw new IllegalArgumentException(mensagem);
 		}
@@ -46,24 +55,6 @@ public class Validador {
 		}
 	}
 
-	private boolean isNull(String valor) {
-		return valor == null;
-	}
-
-	private boolean isNull(Integer valor) {
-		return valor == null;
-	}
-
-	private boolean isEmpty(String valor) {
-		return valor.trim().equals("");
-	}
-
-	public void validaNome(String nome) {
-		if (isNull(nome) || isEmpty(nome)) {
-			throw new IllegalArgumentException("Campo nome nao pode ser nulo ou vazio.");
-		}
-	}
-
 	private boolean possuiDigitoOuLetra(String nome) {
 		for (char letra : nome.toCharArray()) {
 			if (Character.isAlphabetic(letra) || Character.isDigit(letra))
@@ -73,9 +64,7 @@ public class Validador {
 	}
 
 	public void validaEmail(String email) {
-		if (isNull(email) || isEmpty(email)) {
-			throw new IllegalArgumentException("Campo email nao pode ser nulo ou vazio.");
-		}
+		validadorString(email, "Campo email nao pode ser nulo ou vazio.");
 
 		if (!email.contains("@"))
 			throw new IllegalArgumentException("Formato de email invalido.");
@@ -93,23 +82,8 @@ public class Validador {
 
 	}
 
-	public void validaFuncao(String funcao) {
-		if (isNull(funcao) || isEmpty(funcao)) {
-			throw new IllegalArgumentException("Campo funcao nao pode ser nulo ou vazio.");
-		}
-	}
-
-	public void validaBiografia(String biografia) {
-		if (isNull(biografia) || isEmpty(biografia)) {
-			throw new IllegalArgumentException("Campo biografia nao pode ser nulo ou vazio.");
-		}
-
-	}
-
 	public void validaFoto(String foto) {
-		if (isNull(foto) || isEmpty(foto)) {
-			throw new IllegalArgumentException("Campo fotoURL nao pode ser nulo ou vazio.");
-		}
+		validadorString(foto, "Campo fotoURL nao pode ser nulo ou vazio.");
 
 		if (foto.length() < 7) {
 			throw new IllegalArgumentException("Formato de foto invalido.");
@@ -127,19 +101,18 @@ public class Validador {
 	}
 
 	public void validaViabilidade(int valor, String mensagem) {
-		if (isNull(valor) || isEmpty(Integer.toString(valor))) {
-			throw new IllegalArgumentException("Campo viabilidade nao pode ser nulo ou vazio.");
-		} else if (valor > 5 || valor < 1) {
+		validadorInt(valor, "Campo viabilidade nao pode ser nulo ou vazio.");
+
+		if (valor > 5 || valor < 1) {
 			throw new IllegalArgumentException(mensagem);
 		}
 	}
 
 	public void validaAderencia(int valor, String mensagem) {
-		if (isNull(valor) || isEmpty(Integer.toString(valor))) {
-			throw new IllegalArgumentException("Campo aderencia nao pode ser nulo ou vazio.");
-		} else if (valor > 5 || valor < 1) {
+		validadorInt(valor, "Campo aderencia nao pode ser nulo ou vazio.");
+
+		if (valor > 5 || valor < 1) {
 			throw new IllegalArgumentException(mensagem);
 		}
 	}
-
 }

@@ -1,6 +1,10 @@
 package sistemaDePesquisas;
 
+import interfaces.Especialidade;
+
 public class Pesquisador {
+
+	private Especialidade especialidade;
 	private String nome;
 	private String biografia;
 	private String email;
@@ -9,7 +13,6 @@ public class Pesquisador {
 	private String status;
 
 	public Pesquisador(String nome, String funcao, String biografia, String email, String foto) {
-
 		this.nome = nome;
 		this.biografia = biografia;
 		this.email = email;
@@ -18,56 +21,66 @@ public class Pesquisador {
 		this.status = "ativo";
 	}
 
-	public String getStatus() {
-		return status;
+	public void cadastraEspecialidadeProfessor(String formacao, String unidade, String data) {
+		this.especialidade = new Professor(nome, funcao, biografia, email, foto, formacao, unidade, data);
 	}
-	
-	public void setStatus(String status){
-	 this.status = status;
+
+	public void cadastraEspecialidadeAluno(int semestre, double iea) {
+		this.especialidade = new Aluno(nome, funcao, biografia, email, foto, semestre, iea);
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getBiografia() {
 		return biografia;
-	}
-
-	public void setBiografia(String biografia) {
-		this.biografia = biografia;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public String getFuncao() {
+		return funcao;
 	}
 
 	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(String foto) {
-		this.foto = foto;
+	public String getStatus() {
+		return status;
 	}
 
-	public String getFuncao() {
-		return funcao;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setBiografia(String biografia) {
+		this.biografia = biografia;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setFuncao(String funcao) {
 		this.funcao = funcao;
 	}
 
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	@Override
 	public String toString() {
-		return nome + " (" + funcao + ") - "  + biografia + " - " + email + " - " + foto;
+		return getNome() + " (" + getFuncao() + ") - " + getBiografia() + " - " + getEmail() + " - " + getFoto();
 	}
+
 }

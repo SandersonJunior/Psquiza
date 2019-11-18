@@ -1,16 +1,18 @@
 package sistemaDePesquisas;
 
-public class Aluno extends Pesquisador {
-	private String semestre;
+import interfaces.Especialidade;
+
+public class Aluno extends Pesquisador implements Especialidade {
+	private int semestre;
 	private double iea;
 
-	public Aluno(String nome, String biografia, String email, String foto, String funcao, String semestre, double iea) {
-		super(nome, biografia, email, foto, funcao);
+	public Aluno(String nome, String funcao, String biografia, String email, String foto, int semestre, double iea) {
+		super(nome, funcao, biografia, email, foto);
 		this.semestre = semestre;
 		this.iea = iea;
 	}
 
-	public String getSemestre() {
+	public int getSemestre() {
 		return semestre;
 	}
 
@@ -20,7 +22,7 @@ public class Aluno extends Pesquisador {
 
 	@Override
 	public String toString() {
-		return super.toString() + " - " + getSemestre() + " - " + getIea();
+		return super.toString() + " - " + getSemestre() + "o SEMESTRE - " + getIea();
 	}
 
 }
