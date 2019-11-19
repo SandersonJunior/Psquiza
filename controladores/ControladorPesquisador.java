@@ -135,15 +135,24 @@ public class ControladorPesquisador {
 	}
 
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		validador.validadorString(email, "Campo email nao pode ser nulo ou vazio.");
+		validador.validadorString(formacao, "Campo formacao nao pode ser nulo ou vazio.");
+		validador.validadorString(unidade, "Campo unidade nao pode ser nulo ou vazio.");
+		validador.validadorString(data, "Campo data nao pode ser nulo ou vazio.");
+		
 		if (existePesquisador(email)) {
 			this.pesquisadores.get(email).cadastraEspecialidadeProfessor(formacao, unidade, data);
 		}
 	}
 
 	public void cadastraEspecialidadeAluno(String email, int semestre, double iea) {
+		validador.validadorString(email, "Campo email nao pode ser nulo ou vazio.");
+		
 		if (existePesquisador(email)) {
 			this.pesquisadores.get(email).cadastraEspecialidadeAluno(semestre, iea);
 		}
 	}
 
+	
+	
 }
