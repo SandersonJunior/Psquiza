@@ -11,7 +11,7 @@ public class ControladorProblema {
 	
 	int cont = 0;
 	public String cadastraProblema(String descricao, int viabilidade) {
-		validador.validadorString(descricao, "Campo descricao nao pode ser nulo ou vazio.");
+		validador.validaString(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		validador.validaViabilidade(viabilidade, "Valor invalido de viabilidade.");
 		
 		cont += 1;
@@ -21,7 +21,7 @@ public class ControladorProblema {
 	}
 	
 	public void apagarProblema(String codigo) {
-		validador.validadorString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		validador.validaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		
 		if(problemasCadastrados.containsKey(codigo)) {	
 			problemasCadastrados.remove(codigo);
@@ -31,7 +31,7 @@ public class ControladorProblema {
 	}
 	
 	public String exibeProblema(String codigo) {
-		validador.validadorString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		validador.validaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		if(problemasCadastrados.containsKey(codigo)) {
 			return codigo + problemasCadastrados.get(codigo).toString();			
 		}else {

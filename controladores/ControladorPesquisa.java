@@ -14,9 +14,9 @@ public class ControladorPesquisa {
 	private ArrayList<String> objetivos = new ArrayList<>();
 
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
-		validador.validadorString(descricao, "Descricao nao pode ser nula ou vazia.");
-		validador.validadorTamanhoCampoInteresse(campoDeInteresse, "Formato do campo de interesse invalido.");
-		validador.validadorQuantidadeCampoInteresse(campoDeInteresse, "Formato do campo de interesse invalido.");
+		validador.validaString(descricao, "Descricao nao pode ser nula ou vazia.");
+		validador.validaTamanhoCampoInteresse(campoDeInteresse, "Formato do campo de interesse invalido.");
+		validador.validaQuantidadeCampoInteresse(campoDeInteresse, "Formato do campo de interesse invalido.");
 		String codigo = campoDeInteresse.substring(0, 3);
 		codigo = geraCodigo(codigo, 1);
 		pesquisas.put(codigo, new Pesquisa(descricao, campoDeInteresse, codigo));
@@ -44,12 +44,12 @@ public class ControladorPesquisa {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
 		if (conteudoASerAlterado.equals("CAMPO")) {
-			validador.validadorTamanhoCampoInteresse(novoConteudo, "Formato do campo de interesse invalido.");
-			validador.validadorQuantidadeCampoInteresse(novoConteudo, "Formato do campo de interesse invalido.");
+			validador.validaTamanhoCampoInteresse(novoConteudo, "Formato do campo de interesse invalido.");
+			validador.validaQuantidadeCampoInteresse(novoConteudo, "Formato do campo de interesse invalido.");
 			pesquisas.get(codigo).setCampoDeInteresse(novoConteudo);
 		}
 		if (conteudoASerAlterado.equals("DESCRICAO")) {
-			validador.validadorString(novoConteudo, "Descricao nao pode ser nula ou vazia.");
+			validador.validaString(novoConteudo, "Descricao nao pode ser nula ou vazia.");
 			pesquisas.get(codigo).setDescricao(novoConteudo);
 		}
 	}
@@ -58,7 +58,7 @@ public class ControladorPesquisa {
 		if (!pesquisas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
-		validador.validadorString(motivo, "Motivo nao pode ser nulo ou vazio.");
+		validador.validaString(motivo, "Motivo nao pode ser nulo ou vazio.");
 		if (pesquisas.get(codigo).getStatus().equals("desativada")) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
@@ -84,7 +84,7 @@ public class ControladorPesquisa {
 	}
 
 	public boolean pesquisaEhAtiva(String codigo) {
-		validador.validadorString(codigo, "Codigo nao pode ser nulo ou vazio.");
+		validador.validaString(codigo, "Codigo nao pode ser nulo ou vazio.");
 		if (!pesquisas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
@@ -96,8 +96,8 @@ public class ControladorPesquisa {
 	}
 
 	public boolean associaProblema(String idPesquisa, String idProblema) {
-		validador.validadorString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		validador.validadorString(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
+		validador.validaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		validador.validaString(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
 		if (!pesquisas.containsKey(idPesquisa)) {
 			throw new NullPointerException("Pesquisa nao encontrada.");
 		}
@@ -116,8 +116,8 @@ public class ControladorPesquisa {
 	}
 
 	public boolean desassociaProblema(String idPesquisa, String idProblema) {
-		validador.validadorString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		validador.validadorString(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
+		validador.validaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		validador.validaString(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
 		if (!pesquisas.containsKey(idPesquisa)) {
 			throw new NullPointerException("Pesquisa nao encontrada.");
 		}
@@ -134,8 +134,8 @@ public class ControladorPesquisa {
 	}
 
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
-		validador.validadorString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		validador.validadorString(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		validador.validaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		validador.validaString(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
 		if (!pesquisas.containsKey(idPesquisa)) {
 			throw new NullPointerException("Pesquisa nao encontrada.");
 		}
@@ -156,8 +156,8 @@ public class ControladorPesquisa {
 	}
 
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
-		validador.validadorString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		validador.validadorString(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		validador.validaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		validador.validaString(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
 		if (!pesquisas.containsKey(idPesquisa)) {
 			throw new NullPointerException("Pesquisa nao encontrada.");
 		}
@@ -176,7 +176,7 @@ public class ControladorPesquisa {
 	}
 
 	public String listaPesquisas(String ordem) {
-		validador.validadorTipoPesquisa(ordem, "Valor invalido da ordem");
+		validador.validaTipoPesquisa(ordem, "Valor invalido da ordem");
 		ArrayList<String> maiorValor = new ArrayList<>();
 		for (String key : pesquisas.keySet()) {
 			maiorValor.add(key);

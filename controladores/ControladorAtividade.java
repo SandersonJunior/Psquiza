@@ -14,9 +14,9 @@ public class ControladorAtividade {
 	private int cont = 0;
 	public String cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
 		String codigo = "";
-		validador.validadorString(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
-		validador.validadorString(nivelRisco, "Campo nivelRisco nao pode ser nulo ou vazio.");
-		validador.validadorString(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
+		validador.validaString(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
+		validador.validaString(nivelRisco, "Campo nivelRisco nao pode ser nulo ou vazio.");
+		validador.validaString(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
 		if((nivelRisco.equals("BAIXO") || nivelRisco.equals("MEDIO") || nivelRisco.equals("ALTO")) == false) {
 			throw new IllegalArgumentException("Valor invalido do nivel do risco.");
 		}
@@ -29,7 +29,7 @@ public class ControladorAtividade {
 	}
 	
 	public void apagaAtividade(String codigo) {
-		validador.validadorString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		validador.validaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		if(!atividadesCriadas.containsKey(codigo)) {
 			throw new NullPointerException("Atividade nao encontrada");
 		}
@@ -53,8 +53,8 @@ public class ControladorAtividade {
 	}
 	
 	public void cadastraItem(String codigo, String item) {
-		validador.validadorString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
-		validador.validadorString(item, "Item nao pode ser nulo ou vazio.");
+		validador.validaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		validador.validaString(item, "Item nao pode ser nulo ou vazio.");
 		if(!atividadesCriadas.containsKey(codigo)) {
 			throw new NullPointerException("Atividade nao encontrada");
 		}
@@ -62,7 +62,7 @@ public class ControladorAtividade {
 	}
 	
 	public int contaItensPendentes(String codigo) {
-		validador.validadorString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		validador.validaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		if(!atividadesCriadas.containsKey(codigo)) {
 			throw new NullPointerException("Atividade nao encontrada");
 		}
@@ -75,7 +75,7 @@ public class ControladorAtividade {
 		return cont;
 	}
 	public int contaItensRealizados(String codigo) {
-		validador.validadorString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		validador.validaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		if(!atividadesCriadas.containsKey(codigo)) {
 			throw new NullPointerException("Atividade nao encontrada");
 		}

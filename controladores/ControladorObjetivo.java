@@ -12,9 +12,9 @@ public class ControladorObjetivo {
 	int cont = 0;
 
 	public String cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
-		validador.validadorString(tipo, "Campo tipo nao pode ser nulo ou vazio.");
-		validador.validadorTipoObjetivo(tipo, "Valor invalido de tipo.");
-		validador.validadorString(descricao, "Campo descricao nao pode ser nulo ou vazio.");
+		validador.validaString(tipo, "Campo tipo nao pode ser nulo ou vazio.");
+		validador.validaTipoObjetivo(tipo, "Valor invalido de tipo.");
+		validador.validaString(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		validador.validaViabilidade(viabilidade, "Valor invalido de viabilidade.");
 		validador.validaAderencia(aderencia, "Valor invalido de aderencia");
 
@@ -25,7 +25,7 @@ public class ControladorObjetivo {
 	}
 
 	public void apagarObjetivo(String codigo) {
-		validador.validadorString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		validador.validaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 
 		if (objetivosCadastrados.containsKey(codigo)) {
 			objetivosCadastrados.remove(codigo);
@@ -35,7 +35,7 @@ public class ControladorObjetivo {
 	}
 
 	public String exibeObjetivo(String codigo) {
-		validador.validadorString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		validador.validaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 
 		if (objetivosCadastrados.containsKey(codigo)) {
 			return codigo + objetivosCadastrados.get(codigo).toString();

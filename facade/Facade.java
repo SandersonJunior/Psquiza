@@ -150,6 +150,7 @@ public class Facade {
 	public void cadastraEspecialidadeAluno(String email, int semestre, double iea) {
 		controladorPesquisador.cadastraEspecialidadeAluno(email, semestre, iea);
 	}
+	
 
 	public static void main(String[] args) {
 		args = new String[] { "facade.Facade", "teste_aceitacao/use_case_1.txt", "teste_aceitacao/use_case_2.txt",
