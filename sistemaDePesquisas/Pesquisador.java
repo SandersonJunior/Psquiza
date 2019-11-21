@@ -1,8 +1,9 @@
 package sistemaDePesquisas;
 
 import interfaces.Especialidade;
+import java.io.Serializable;
 
-public class Pesquisador {
+public class Pesquisador implements Serializable {
 	private Especialidade especialidade;
 	private String nome;
 	private String biografia;
