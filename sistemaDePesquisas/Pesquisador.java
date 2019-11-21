@@ -3,7 +3,6 @@ package sistemaDePesquisas;
 import interfaces.Especialidade;
 
 public class Pesquisador {
-
 	private Especialidade especialidade;
 	private String nome;
 	private String biografia;
@@ -28,7 +27,7 @@ public class Pesquisador {
 	public void cadastraEspecialidadeAluno(int semestre, double iea) {
 		this.especialidade = new Aluno(nome, funcao, biografia, email, foto, semestre, iea);
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}

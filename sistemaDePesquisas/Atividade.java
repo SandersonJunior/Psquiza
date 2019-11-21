@@ -2,22 +2,25 @@ package sistemaDePesquisas;
 
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 
 import sistemaDePesquisas.Item;
 
-public class Atividade {
+public class Atividade implements Serializable {
 	private String descricao;
 	private int duracao;
 	private String descricaoRisco;
 	private String nivelRisco;
 	private ArrayList<Item> itensAtividade;
+	private ArrayList<Resultado> resultadosAtividade;
 
 	public Atividade(String descricao, String nivelRisco, String descricaoRisco) {
 		this.descricao = descricao;
 		this.descricaoRisco = descricaoRisco;
 		this.nivelRisco = nivelRisco;
 		this.itensAtividade = new ArrayList<Item>();
+		this.resultadosAtividade = new ArrayList<Resultado>();
 	}
 
 
@@ -25,6 +28,9 @@ public class Atividade {
 		return itensAtividade;
 	}
 
+	public ArrayList<Resultado> getResultados() {
+		return resultadosAtividade;
+	}
 
 	public String getDescricao() {
 		return descricao;

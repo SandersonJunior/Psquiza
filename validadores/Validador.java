@@ -1,9 +1,10 @@
 package validadores;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class Validador {
+public class Validador implements Serializable{
 
 	public void validaString(String palavra, String mensagem) {
 		if (palavra == null) {
@@ -132,10 +133,10 @@ public class Validador {
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Atributo data com formato invalido.");
 		}
-		
+
 		return true;
 	}
-	
+
 	public void validaProfessor(String email, String formacao, String unidade, String data) {
 		validaString(email, "Campo email nao pode ser nulo ou vazio.");
 		validaString(formacao, "Campo formacao nao pode ser nulo ou vazio.");
@@ -143,17 +144,39 @@ public class Validador {
 		validaString(data, "Campo data nao pode ser nulo ou vazio.");
 		validaData(data);
 	}
-	
+
 	public void validaAluno(String email, int semestre, double iea) {
 		validaString(email, "Campo email nao pode ser nulo ou vazio.");
-		
+
 		if (semestre < 1) {
 			throw new IllegalArgumentException("Atributo semestre com formato invalido.");
 		}
-		
+
 		if (iea < 0 || iea > 10) {
 			throw new IllegalArgumentException("Atributo IEA com formato invalido.");
 		}
 	}
+
+	public void validaInteiro(int valor, String mensagem) {
+		if (valor < 0) {
+			throw new IllegalArgumentException(mensagem);
+		}
+	}
 	
+	public void validaDuracao(int duracao) {
+		if(Integer.toString(duracao).equals(null) || duracao < 0) {
+			throw new IllegalArgumentException("Duracao nao pode ser nula ou negativa.");
+		}
+	}
+	public void validaItem(int item) {
+		if(Integer.toString(item).equals(null) || item < 0) {
+			throw new IllegalArgumentException("Item nao pode ser nulo ou negativo.");
+		}
+	}
+	public void validaNumResultado(int numeroResultado) {
+		if(Integer.toString(numeroResultado).equals(null) || numeroResultado < 0) {
+			throw new IllegalArgumentException("numeroResultado nao pode ser nulo ou negativo.");
+		}
+	}
+
 }

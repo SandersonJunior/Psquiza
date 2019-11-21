@@ -4,13 +4,15 @@ import sistemaDePesquisas.Pesquisador;
 import sistemaDePesquisas.Professor;
 import validadores.Validador;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 
 //import org.hamcrest.core.Is;
 //import org.hamcrest.core.IsNull;
 
-public class ControladorPesquisador {
+public class ControladorPesquisador implements Serializable {
+	
 	private HashMap<String, Pesquisador> pesquisadores = new HashMap<>();
 	private Validador validador = new Validador();
 
@@ -25,11 +27,15 @@ public class ControladorPesquisador {
 
 	}
 
+	public HashMap<String, Pesquisador> getPesquisadores() {
+		return pesquisadores;
+	}
+
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
 		validador.validaString(atributo, "Atributo nao pode ser vazio ou nulo.");
 		validador.validaEmail(email);
 
-		if (!pesquisadores.containsKey(email)) {
+		if (!existePesquisador(email)) {
 			throw new IllegalArgumentException("Pesquisador nao encontrado");
 		}
 
@@ -58,6 +64,7 @@ public class ControladorPesquisador {
 			pesquisadores.put(novoValor, pesquisadores.get(email));
 			pesquisadores.get(email).setEmail(novoValor);
 			pesquisadores.remove(email);
+
 		}
 	}
 
@@ -65,7 +72,7 @@ public class ControladorPesquisador {
 		validador.validaString(email, "Email nao pode ser vazio ou nulo.");
 		validador.validaEmail(email);
 
-		if (!pesquisadores.containsKey(email)) {
+		if (!existePesquisador(email)) {
 			throw new NullPointerException("Pesquisador nao encontrado");
 		}
 
@@ -79,7 +86,7 @@ public class ControladorPesquisador {
 	public String exibePesquisador(String email) {
 		validador.validaEmail(email);
 
-		if (pesquisadores.containsKey(email)) {
+		if (existePesquisador(email)) {
 			return pesquisadores.get(email).toString();
 		}
 
@@ -90,7 +97,7 @@ public class ControladorPesquisador {
 	public void ativaPesquisador(String email) {
 		validador.validaEmail(email);
 
-		if (!pesquisadores.containsKey(email)) {
+		if (!existePesquisador(email)) {
 			throw new NullPointerException("Pesquisador nao encontrado");
 		}
 
@@ -104,7 +111,7 @@ public class ControladorPesquisador {
 	public void desativaPesquisador(String email) {
 		validador.validaEmail(email);
 
-		if (!pesquisadores.containsKey(email)) {
+		if (!existePesquisador(email)) {
 			throw new NullPointerException("Pesquisador nao encontrado");
 		}
 
@@ -125,32 +132,75 @@ public class ControladorPesquisador {
 	}
 
 	public boolean existePesquisador(String email) {
-		boolean existe = false;
 
 		if (pesquisadores.containsKey(email)) {
-			existe = true;
+			return true;
 		}
 
-		return existe;
+		return false;
+	}
+
+	public boolean ehPesquisador(String email, String funcao) {
+
+		if (!pesquisadores.get(email).getFuncao().equals(funcao)) {
+			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
+		}
+
+		return true;
 	}
 
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		validador.validaProfessor(email, formacao, unidade, data);
 
-		if (existePesquisador(email)) {
-			this.pesquisadores.get(email).cadastraEspecialidadeProfessor(formacao, unidade, data);
-		} else {
+		if (!existePesquisador(email)) {
 			throw new IllegalArgumentException("Pesquisadora nao encontrada.");
 		}
+
+		ehPesquisador(email, "professor");
+
+		pesquisadores.get(email).cadastraEspecialidadeProfessor(formacao, unidade, data);
+
 	}
 
 	public void cadastraEspecialidadeAluno(String email, int semestre, double iea) {
 		validador.validaAluno(email, semestre, iea);
 
-		if (existePesquisador(email)) {
-			this.pesquisadores.get(email).cadastraEspecialidadeAluno(semestre, iea);
-		} else {
+		if (!existePesquisador(email)) {
 			throw new IllegalArgumentException("Pesquisadora nao encontrada.");
 		}
+
+		ehPesquisador(email, "estudante");
+
+		pesquisadores.get(email).cadastraEspecialidadeAluno(semestre, iea);
+
 	}
+
+	public String listaPesquisadores(String tipo) {
+		validador.validaString(tipo, "Campo tipo nao pode ser nulo ou vazio.");
+
+		String lista = "";
+
+		for (String key : pesquisadores.keySet()) {
+			if (tipo.equals("EXTERNO")) {
+				if (pesquisadores.get(key).getFuncao().equals("externo")) {
+					lista += pesquisadores.get(key) + " | ";
+				}
+			} else if (tipo.equals("PROFESSORA")) {
+				if (pesquisadores.get(key).getFuncao().equals("professor")) {
+					lista += pesquisadores.get(key) + " | ";
+				}
+			} else if (tipo.equals("ALUNA")) {
+				if (pesquisadores.get(key).getFuncao().equals("estudante")) {
+					lista += pesquisadores.get(key) + " | ";
+				}
+
+			} else {
+				throw new IllegalArgumentException("Tipo " + tipo + " inexistente.");
+			}
+
+		}
+
+		return lista.substring(0, lista.length() - 3);
+	}
+
 }

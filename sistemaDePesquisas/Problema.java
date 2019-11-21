@@ -1,8 +1,9 @@
 package sistemaDePesquisas;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Problema {
+public class Problema implements Serializable {
 	private String descricao;
 	private int viabilidade;
 	private ArrayList<String> pesquisas;
@@ -14,6 +15,16 @@ public class Problema {
 	}
 	
 	
+	public String getDescricao() {
+		return descricao;
+	}
+
+
+	public int getViabilidade() {
+		return viabilidade;
+	}
+
+
 	public ArrayList<String> getPesquisas() {
 		return pesquisas;
 	}

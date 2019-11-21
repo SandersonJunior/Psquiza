@@ -28,6 +28,18 @@ public class Professor extends Pesquisador implements Especialidade {
 		return data;
 	}
 
+	public void setFormacao(String formacao) {
+		this.formacao = formacao;
+	}
+
+	public void setUnidade(String unidade) {
+		this.unidade = unidade;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
 	@Override
 	public String toString() {
 		return super.toString() + " - " + getFormacao() + " - " + getUnidade() + " - " + getData();

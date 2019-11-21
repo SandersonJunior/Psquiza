@@ -1,6 +1,8 @@
 package sistemaDePesquisas;
 
-public class Objetivo {
+import java.io.Serializable;
+
+public class Objetivo implements Serializable {
 	private String tipo;
 	private String descricao;
 	private int aderencia;
@@ -16,6 +18,10 @@ public class Objetivo {
 	public String toString() {
 		int valor = aderencia + viabilidade;
 		return " - " + tipo + " - " + descricao + " - " + valor;
+	}
+
+	public String getDescricao() {
+		return descricao;
 	}
 	
 	

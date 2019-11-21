@@ -2,10 +2,12 @@ package controladores;
 
 import java.util.HashMap;
 
+import java.io.Serializable;
+import sistemaDePesquisas.Pesquisador;
 import sistemaDePesquisas.Problema;
 import validadores.Validador;
 
-public class ControladorProblema {
+public class ControladorProblema implements Serializable {
 	private static Validador validador = new Validador();
 	private HashMap<String, Problema> problemasCadastrados = new HashMap<>();
 	
@@ -37,6 +39,10 @@ public class ControladorProblema {
 		}else {
 			throw new IllegalArgumentException("Problema nao encontrado");
 		}
+	}
+	
+	public HashMap<String, Problema> getProblemas(){
+		return this.problemasCadastrados;
 	}
 	
 

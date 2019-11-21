@@ -2,10 +2,11 @@ package controladores;
 
 import java.util.HashMap;
 
+import java.io.Serializable;
 import sistemaDePesquisas.Objetivo;
 import validadores.Validador;
 
-public class ControladorObjetivo {
+public class ControladorObjetivo implements Serializable {
 	private Validador validador = new Validador();
 	private HashMap<String, Objetivo> objetivosCadastrados = new HashMap<>();
 
@@ -43,6 +44,12 @@ public class ControladorObjetivo {
 			throw new IllegalArgumentException("Objetivo nao encontrado");
 		}
 
+	}
+	
+	
+
+	public HashMap<String, Objetivo> getObjetivos() {
+		return objetivosCadastrados;
 	}
 
 	@Override

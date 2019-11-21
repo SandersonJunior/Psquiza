@@ -1,6 +1,8 @@
 package sistemaDePesquisas;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
 	private String status;
 	private String codigoItem;
 	
@@ -15,5 +17,9 @@ public class Item {
 	
 	public String getStatus() {
 		return this.status;
-	}	
+	}
+	
+	public String setStatus(String status) {
+		return status;
+	}
 }

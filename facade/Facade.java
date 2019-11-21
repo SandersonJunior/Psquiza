@@ -1,5 +1,11 @@
 package facade;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import controladores.ControladorAtividade;
 import controladores.ControladorPesquisa;
 import controladores.ControladorPesquisador;
@@ -40,7 +46,7 @@ public class Facade {
 	public boolean pesquisaEhAtiva(String codigo) {
 		return controladorP.pesquisaEhAtiva(codigo);
 	}
-	
+
 // US 2
 
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String foto) {
@@ -68,7 +74,7 @@ public class Facade {
 	}
 
 // US 3
-	
+
 	public String cadastraProblema(String descricao, int viabilidade) {
 		return controladorProblema.cadastraProblema(descricao, viabilidade);
 	}
@@ -140,21 +146,96 @@ public class Facade {
 	public String listaPesquisas(String ordem) {
 		return controladorP.listaPesquisas(ordem);
 	}
-	
+
 // US 6
 	
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		controladorPesquisador.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
 	}
-	
+
 	public void cadastraEspecialidadeAluno(String email, int semestre, double iea) {
 		controladorPesquisador.cadastraEspecialidadeAluno(email, semestre, iea);
 	}
+
+	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
+		return controladorP.associaPesquisador(idPesquisa, emailPesquisador);
+	}
+
+	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
+		return controladorP.desassociaPesquisador(idPesquisa, emailPesquisador);
+	}
+
+	public String listaPesquisadores(String tipo) {
+		return controladorPesquisador.listaPesquisadores(tipo);
+	}
+
+// US 7
 	
+	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
+		return controladorP.associaAtividade(codigoPesquisa, codigoAtividade);
+	}
+	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
+		return controladorP.desassociaAtividade(codigoPesquisa, codigoAtividade);
+	}
+	public void executaAtividade(String codigoAtividade, int item, int duracao) {
+		controladorP.executaAtividade(codigoAtividade, item, duracao);
+	}
+	public int cadastraResultado(String codigoAtividade, String resultado) {
+		return controlerA.cadastraResultado(codigoAtividade, resultado);
+	}
+	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
+		return controlerA.removeResultado(codigoAtividade, numeroResultado);
+	}
+	public String listaResultados(String codigoAtividade) {
+		return controlerA.listaResultados(codigoAtividade); 
+	}
+	public int getDuracao(String codigoAtividade) {
+		return controlerA.getDuracao(codigoAtividade);
+	}
+
+// US 8
+
+	public String busca(String termo) {
+		return controladorP.busca(termo, controladorP, controladorPesquisador, controlerA, controladorObjetivo,
+				controladorProblema);
+	}
+
+	public String busca(String termo, int numeroDoResultado) {
+		return controladorP.busca(termo, numeroDoResultado, controladorP, controladorPesquisador, controlerA,
+				controladorObjetivo, controladorProblema);
+	}
+
+	public int contaResultadosBusca(String termo) {
+		return controladorP.contaResultadosBusca(termo, controladorP, controladorPesquisador, controlerA,
+				controladorObjetivo, controladorProblema);
+	}
+
+// US 12
+
+	public void salvar() throws IOException {
+		FileOutputStream arquivo = new FileOutputStream("sistemaDePesquisas.Arquivos.ser");
+		ObjectOutputStream oos = new ObjectOutputStream(arquivo);
+		oos.writeObject(controlerA);
+		oos.writeObject(controladorP);
+		oos.writeObject(controladorProblema);
+		oos.writeObject(controladorObjetivo);
+		oos.writeObject(controladorPesquisador);
+		oos.close();
+	}
+
+	public void carregar() throws IOException, ClassNotFoundException {
+		FileInputStream arquivo = new FileInputStream("sistemaDePesquisas.Arquivos.ser");
+		ObjectInputStream ois = new ObjectInputStream(arquivo);
+		controlerA = (ControladorAtividade) ois.readObject();
+		controladorP = (ControladorPesquisa) ois.readObject();
+		controladorProblema = (ControladorProblema) ois.readObject();
+		controladorObjetivo = (ControladorObjetivo) ois.readObject();
+		controladorPesquisador = (ControladorPesquisador) ois.readObject();
+		ois.close();
+	}
 
 	public static void main(String[] args) {
-		args = new String[] { "facade.Facade", "teste_aceitacao/use_case_1.txt", "teste_aceitacao/use_case_2.txt",
-				"teste_aceitacao/use_case_3.txt", "teste_aceitacao/use_case_4.txt", "teste_aceitacao/use_case_5.txt", "teste_aceitacao/use_case_6.txt" };
+		args = new String[] { "facade.Facade", "teste_aceitacao/use_case_1.txt", "teste_aceitacao/use_case_2.txt", "teste_aceitacao/use_case_3.txt", "teste_aceitacao/use_case_4.txt", "teste_aceitacao/use_case_5.txt", "teste_aceitacao/use_case_6.txt", "teste_aceitacao/use_case_7.txt", "teste_aceitacao/use_case_8.txt", "teste_aceitacao/use_case_12SALVAR.txt", "teste_aceitacao/use_case_12CARREGAR.txt" };
 
 		EasyAccept.main(args);
 	}
